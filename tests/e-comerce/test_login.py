@@ -3,24 +3,7 @@ import pytest
 import os
 import re
 
-
-@pytest.fixture
-def setup_page(page: Page):
-    page.goto("https://practice.qabrains.com/ecommerce/login")
-    yield
-
-
-def check_user_has_logged_in(page: Page):
-    """Helper function to verify user has successfully logged in"""
-    expect(page).to_have_url(re.compile(".*ecommerce"), timeout=5000)
-    expect(page.get_by_role("heading", name="Products")).to_be_visible()
-
-
-def log_in_user(page: Page, email: str=os.getenv("EMAIL"), password: str=os.getenv("PASSWORD")):
-    """Helper function to log in user"""
-    page.get_by_label("Email").fill(email)
-    page.get_by_label("Password").fill(password)
-    page.get_by_role("button", name="Login").click()
+from tests.helpers.login_helpers import check_user_has_logged_in, log_in_user
 
 
 @pytest.mark.smoke
