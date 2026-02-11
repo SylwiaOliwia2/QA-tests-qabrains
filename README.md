@@ -27,7 +27,7 @@ env\Scripts\activate
 
 ```bash
 # Install required packages
-pip install playwright pytest python-dotenv
+pip install -r requirements.txt
 
 # Install Playwright browsers
 playwright install
@@ -67,5 +67,37 @@ pytest -v
 ## Test Structure
 
 - `tests/e-comerce/test_login.py` - Login page test suite
+- `tests/helpers/login_helpers.py` - Helper functions for login tests
 - `conftest.py` - Pytest configuration and fixtures
 - `pytest.ini` - Pytest markers configuration
+
+## CI/CD with GitHub Actions
+
+This repository includes GitHub Actions workflows for automated testing.
+
+### Setup GitHub Secrets
+
+For CI/CD to work, you need to configure GitHub Secrets:
+
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Secrets and variables** → **Actions**
+3. Add the following secrets:
+   - `TEST_EMAIL`: Your test account email
+   - `TEST_PASSWORD`: Your test account password
+
+### CI Workflow
+
+The workflow (`.github/workflows/tests.yml`) runs:
+
+- **Smoke tests**: On every push and pull request
+  - Fast feedback on critical functionality
+  - Blocks PRs if smoke tests fail
+
+- **Regression tests**: Only on merge to `main`/`master`
+  - Comprehensive test suite
+  - Full validation before deployment
+
+### Workflow Triggers
+
+- `push` to `main`, `master`, or `develop` branches
+- `pull_request` to `main`, `master`, or `develop` branches
