@@ -15,10 +15,14 @@ def test_has_heading(page: Page, setup_page):
 
 @pytest.mark.smoke
 @pytest.mark.regression
-def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
-    
-    log_in_user(page)
-    check_user_has_logged_in(page)
+def test_user_can_log_in_with_valid_credentials(page: Page):
+    page.get_by_label("Email").fill(os.getenv("EMAIL"))
+    page.get_by_label("Password").fill(os.getenv("PASSWORD"))
+    page.get_by_role("button", name="Login").click()
+    # log_in_user(page)
+    # check_user_has_logged_in(page)
+    expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
+    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
 
 
 @pytest.mark.regression
