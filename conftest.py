@@ -9,5 +9,7 @@ load_dotenv()
 @pytest.fixture
 def setup_page(page: Page):
     """Fixture to navigate to the e-commerce login page"""
-    page.goto("https://practice.qabrains.com/ecommerce/login")
+    page.goto("https://practice.qabrains.com/ecommerce/login", wait_until="load", timeout=30000)
+    # NOTE wait for page to be fully loaded; CI is slower, default timeout can be too short
+    page.wait_for_load_state("load")
     yield
