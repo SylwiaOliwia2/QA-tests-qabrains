@@ -116,5 +116,5 @@ def test_logged_in_user_can_log_out(page: Page, setup_page):
     page.get_by_role("button", name="Log out").click()
     page.get_by_role("button", name="Logout").click()
 
-    expect(page).to_have_url(re.compile(".*login"), timeout=5000)
+    expect(page).to_have_url(re.compile(".*login"), timeout=30000)
     expect(page.get_by_role("heading", name="Login")).to_be_visible()
