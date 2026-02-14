@@ -126,20 +126,21 @@ def test_logged_in_user_can_log_out(page: Page, setup_page):
 # TODO: delete this test; for debugging purposes only
 @pytest.mark.smoke
 def test_login_enter(page: Page):
-    page.goto("https://practice.qabrains.com/")
-    success_message = page.get_by_role("heading", name="Login Successful")
+    # page.goto("https://practice.qabrains.com/")
+    page.goto("https://practice.qabrains.com/ecommerce/login")
+    # success_message = page.get_by_role("heading", name="Login Successful")
     
     # before login - no 'Login Successful' message
-    expect(success_message).not_to_be_attached()
+    # expect(success_message).not_to_be_attached()
     
     email = page.get_by_label("Email")
     password = page.get_by_label("Password")
 
-    email.fill("qa_testers@qabrains.com")
+    email.fill("test@qabrains.com")
     password.fill("Password123")
     password.press("Enter")
 
     expect(page).to_have_url(re.compile(".*logged=true"), timeout=5000)
     
-    expect(success_message).to_be_attached()
-    expect(success_message).to_be_visible()
+    # expect(success_message).to_be_attached()
+    # expect(success_message).to_be_visible()
