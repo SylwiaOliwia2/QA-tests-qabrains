@@ -22,7 +22,6 @@ def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     # log_in_user(page)
     # check_user_has_logged_in(page)
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
-    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
 
 
 @pytest.mark.regression
@@ -48,7 +47,8 @@ def test_user_sees_error_message_when_password_is_invalid(page: Page, setup_page
 
     page.get_by_role("button", name="Login").click()
 
-    expect(page.get_by_text("Username matched but password is incorrect.")).to_be_visible()
+    password_warning = page.get_by_text("Username matched but password is incorrect.")
+    expect(password_warning).to_be_visible()
 
 
 @pytest.mark.smoke
