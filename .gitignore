@@ -41,3 +41,5 @@ trace.zip
 *.log
 .env.local
 .env.*.local
+
+notes/
