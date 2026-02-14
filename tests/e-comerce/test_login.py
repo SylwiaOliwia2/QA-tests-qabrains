@@ -140,7 +140,6 @@ def test_login_enter(page: Page, setup_page):
     password.fill(os.getenv("PASSWORD"))
     password.press("Enter")
 
-    expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
+    # expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
     
-    # expect(success_message).to_be_attached()
-    # expect(success_message).to_be_visible()
+    check_user_has_logged_in(page)
