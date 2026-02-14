@@ -15,7 +15,7 @@ def test_has_heading(page: Page, setup_page):
 
 @pytest.mark.smoke
 @pytest.mark.regression
-def test_user_can_log_in_with_valid_credentials(page: Page):
+def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     page.get_by_label("Email").fill(os.getenv("EMAIL"))
     page.get_by_label("Password").fill(os.getenv("PASSWORD"))
     page.get_by_role("button", name="Login").click()
@@ -136,8 +136,8 @@ def test_login_enter(page: Page, setup_page):
     email = page.get_by_label("Email")
     password = page.get_by_label("Password")
 
-    email.fill("test@qabrains.com")
-    password.fill("Password123")
+    email.fill(os.getenv("EMAIL"))
+    password.fill(os.getenv("PASSWORD"))
     password.press("Enter")
 
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
