@@ -144,6 +144,7 @@ def test_login_enter(page: Page, setup_page):
     with page.expect_navigation(timeout=60000, wait_until="networkidle"):
         password.press("Enter")
 
-    # expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
+    expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
+    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=60000)
     
-    check_user_has_logged_in(page)
+    # check_user_has_logged_in(page)
