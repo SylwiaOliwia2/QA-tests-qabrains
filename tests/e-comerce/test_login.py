@@ -33,7 +33,9 @@ def test_user_can_log_in_with_valid_credentials_2(page: Page, setup_page):
     password = page.get_by_label("Password")
     password.fill(os.getenv("PASSWORD"))
 
-    password.press("Enter")
+    # Wait for navigation after pressing Enter - CI environments are slower
+    with page.expect_navigation(timeout=60000, wait_until="networkidle"):
+        password.press("Enter")
 
     check_user_has_logged_in(page)
 
@@ -138,7 +140,9 @@ def test_login_enter(page: Page, setup_page):
 
     email.fill(os.getenv("EMAIL"))
     password.fill(os.getenv("PASSWORD"))
-    password.press("Enter")
+    # Wait for navigation after pressing Enter - CI environments are slower
+    with page.expect_navigation(timeout=60000, wait_until="networkidle"):
+        password.press("Enter")
 
     # expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
     

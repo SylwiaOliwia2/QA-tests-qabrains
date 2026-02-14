@@ -5,8 +5,10 @@ import re
 
 def check_user_has_logged_in(page: Page):
     """Helper function to verify user has successfully logged in"""
+    # Wait for navigation to complete and page to be ready
+    page.wait_for_load_state("networkidle", timeout=60000)
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
-    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
+    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=60000)
 
 
 def log_in_user(page: Page, email: str = os.getenv("EMAIL"), password: str = os.getenv("PASSWORD")):
