@@ -140,12 +140,6 @@ def test_login_enter(page: Page, setup_page):
 
     email.fill(os.getenv("EMAIL"))
     password.fill(os.getenv("PASSWORD"))
-    # Wait for navigation after pressing Enter - CI environments are slower
-    with page.expect_navigation():
-        # password.press("Enter")
-        page.get_by_role("button", name="Login").click()
-
-    expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
-    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=60000)
+    page.get_by_role("button", name="Login").click()
     
-    # check_user_has_logged_in(page)
+    check_user_has_logged_in(page)
