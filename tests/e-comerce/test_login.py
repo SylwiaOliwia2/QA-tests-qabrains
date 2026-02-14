@@ -125,9 +125,9 @@ def test_logged_in_user_can_log_out(page: Page, setup_page):
 
 # TODO: delete this test; for debugging purposes only
 @pytest.mark.smoke
-def test_login_enter(page: Page):
+def test_login_enter(page: Page, setup_page):
     # page.goto("https://practice.qabrains.com/")
-    page.goto("https://practice.qabrains.com/ecommerce/login")
+    # page.goto("https://practice.qabrains.com/ecommerce/login")
     # success_message = page.get_by_role("heading", name="Login Successful")
     
     # before login - no 'Login Successful' message
