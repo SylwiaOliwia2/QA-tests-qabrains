@@ -14,12 +14,6 @@ def test_has_heading(page: Page, setup_page):
 
 
 @pytest.mark.smoke
-def envs_exist():
-    assert os.getenv("EMAIL"), "EMAIL is missing"
-    assert os.getenv("PASSWORD"), "PASSWORD is missing"
-
-
-@pytest.mark.smoke
 @pytest.mark.regression
 def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     page.get_by_label("Email").fill(os.getenv("EMAIL"))
@@ -48,27 +42,27 @@ def test_user_can_log_in_with_valid_credentials_2(page: Page, setup_page):
     check_user_has_logged_in(page)
 
 
-# @pytest.mark.smoke
-# @pytest.mark.regression
-# def test_user_sees_error_message_when_password_is_invalid(page: Page, setup_page):
-#     page.get_by_label("Email").fill(os.getenv("EMAIL"))
-#     page.get_by_label("Password").fill("invalid")
+@pytest.mark.smoke
+@pytest.mark.regression
+def test_user_sees_error_message_when_password_is_invalid(page: Page, setup_page):
+    page.get_by_label("Email").fill(os.getenv("EMAIL"))
+    page.get_by_label("Password").fill("invalid")
 
-#     page.get_by_role("button", name="Login").click()
+    page.get_by_role("button", name="Login").click()
 
-#     password_warning = page.get_by_text("Username matched but password is incorrect.")
-#     expect(password_warning).to_be_visible()
+    password_warning = page.get_by_text("Username matched but password is incorrect.")
+    expect(password_warning).to_be_visible()
 
 
-# @pytest.mark.smoke
-# @pytest.mark.regression
-# def test_user_sees_error_message_when_email_is_incorrect(page: Page, setup_page):
-#     page.get_by_label("Email").fill("xsfsfsfdx@gmail.com")
-#     page.get_by_label("Password").fill(os.getenv("PASSWORD"))
+@pytest.mark.smoke
+@pytest.mark.regression
+def test_user_sees_error_message_when_email_is_incorrect(page: Page, setup_page):
+    page.get_by_label("Email").fill("xsfsfsfdx@gmail.com")
+    page.get_by_label("Password").fill(os.getenv("PASSWORD"))
 
-#     page.get_by_role("button", name="Login").click()
+    page.get_by_role("button", name="Login").click()
 
-#     expect(page.get_by_text("Password matched but email is incorrect.")).to_be_visible()
+    expect(page.get_by_text("Password matched but email is incorrect.")).to_be_visible()
 
 
 @pytest.mark.regression
@@ -122,33 +116,14 @@ def test_whitespaces_are_trimmed_from_email(page: Page, setup_page):
     check_user_has_logged_in(page)
 
 
-# @pytest.mark.regression
-# @pytest.mark.smoke
-# def test_logged_in_user_can_log_out(page: Page, setup_page):
-#     log_in_user(page)
+@pytest.mark.regression
+@pytest.mark.smoke
+def test_logged_in_user_can_log_out(page: Page, setup_page):
+    log_in_user(page)
     
-#     page.get_by_role("button", name=os.getenv("EMAIL")).click()
-#     page.get_by_role("button", name="Log out").click()
-#     page.get_by_role("button", name="Logout").click()
+    page.get_by_role("button", name=os.getenv("EMAIL")).click()
+    page.get_by_role("button", name="Log out").click()
+    page.get_by_role("button", name="Logout").click()
 
-#     expect(page).to_have_url(re.compile(".*login"), timeout=30000)
-#     expect(page.get_by_role("heading", name="Login")).to_be_visible()
-
-# TODO: delete this test; for debugging purposes only
-# @pytest.mark.smoke
-# def test_login_enter(page: Page, setup_page):
-#     # page.goto("https://practice.qabrains.com/ecommerce/login")
-#     # page.goto("https://practice.qabrains.com/")
-#     # success_message = page.get_by_role("heading", name="Login Successful")
-    
-#     # before login - no 'Login Successful' message
-#     # expect(success_message).not_to_be_attached()
-    
-#     email = page.get_by_label("Email")
-#     password = page.get_by_label("Password")
-
-#     email.fill(os.getenv("EMAIL"))
-#     password.fill(os.getenv("PASSWORD"))
-#     page.get_by_role("button", name="Login").click()
-    
-#     check_user_has_logged_in(page)
+    expect(page).to_have_url(re.compile(".*login"), timeout=30000)
+    expect(page.get_by_role("heading", name="Login")).to_be_visible()
