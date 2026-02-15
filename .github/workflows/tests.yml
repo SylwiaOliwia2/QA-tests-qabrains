@@ -29,16 +29,14 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install --with-deps
       
-      - name: Set up environment variables
+      - name: Run smoke tests
         env:
           EMAIL: ${{ secrets.TEST_EMAIL }}
           PASSWORD: ${{ secrets.TEST_PASSWORD }}
         run: |
-          echo "EMAIL=${{ secrets.TEST_EMAIL }}" >> $GITHUB_ENV
-          echo "PASSWORD=${{ secrets.TEST_PASSWORD }}" >> $GITHUB_ENV
-      
-      - name: Run smoke tests
-        run: pytest -m smoke -v
+          echo "EMAIL=${{ secrets.EMAIL }}"
+          echo "PASSWORD=${{ secrets.PASSWORD }}"
+          pytest -m smoke -v
       
       - name: Upload test results (if failed)
         if: failure()
@@ -72,16 +70,14 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install --with-deps
       
-      - name: Set up environment variables
+      - name: Run regression tests
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          echo "EMAIL=${{ secrets.EMAIL }}" >> $GITHUB_ENV
-          echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
-      
-      - name: Run regression tests
-        run: pytest -m regression -v
+          echo "EMAIL=${{ secrets.EMAIL }}"
+          echo "PASSWORD=${{ secrets.PASSWORD }}"
+          pytest -m regression -v
       
       - name: Upload test results (if failed)
         if: failure()
