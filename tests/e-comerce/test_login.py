@@ -19,6 +19,7 @@ def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     page.get_by_label("Email").fill(os.getenv("EMAIL"))
     page.get_by_label("Password").fill(os.getenv("PASSWORD"))
     page.get_by_role("button", name="Login").click()
+    page.wait_for_load_state("networkidle", timeout=180000)
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
     expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=180000)
 
