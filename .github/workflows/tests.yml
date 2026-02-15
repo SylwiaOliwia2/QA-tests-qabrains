@@ -46,6 +46,14 @@ jobs:
           path: |
             test-results/
             playwright-report/
+      
+      - name: Upload debug screenshots (if failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-debug-screenshots
+          path: debug.png
+          if-no-files-found: ignore
 
   regression:
     name: Regression Tests
@@ -87,3 +95,11 @@ jobs:
           path: |
             test-results/
             playwright-report/
+      
+      - name: Upload debug screenshots (if failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-debug-screenshots
+          path: debug.png
+          if-no-files-found: ignore

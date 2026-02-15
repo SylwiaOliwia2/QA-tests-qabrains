@@ -14,14 +14,20 @@ def test_has_heading(page: Page, setup_page):
 
 
 @pytest.mark.smoke
+def envs_exist():
+    assert os.getenv("EMAIL"), "EMAIL is missing"
+    assert os.getenv("PASSWORD"), "PASSWORD is missing"
+
+
+@pytest.mark.smoke
 @pytest.mark.regression
 def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     page.get_by_label("Email").fill(os.getenv("EMAIL"))
     page.get_by_label("Password").fill(os.getenv("PASSWORD"))
     page.get_by_role("button", name="Login").click()
-    page.wait_for_load_state("networkidle", timeout=180000)
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
-    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=180000)
+    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
+    page.screenshot(path="debug.png", full_page=True)
 
 
 @pytest.mark.regression
