@@ -31,11 +31,11 @@ jobs:
       
       - name: Run smoke tests
         env:
-          EMAIL: ${{ secrets.TEST_EMAIL }}
-          PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          echo "EMAIL=${{ secrets.EMAIL }}"
-          echo "PASSWORD=${{ secrets.PASSWORD }}"
+          echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
+          echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
           pytest -m smoke -v
       
       - name: Upload test results (if failed)
@@ -83,8 +83,8 @@ jobs:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          echo "EMAIL=${{ secrets.EMAIL }}"
-          echo "PASSWORD=${{ secrets.PASSWORD }}"
+          echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
+          echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
           pytest -m regression -v
       
       - name: Upload test results (if failed)
