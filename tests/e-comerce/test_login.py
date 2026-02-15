@@ -19,12 +19,8 @@ def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     page.get_by_label("Email").fill(os.getenv("EMAIL"))
     page.get_by_label("Password").fill(os.getenv("PASSWORD"))
     page.get_by_role("button", name="Login").click()
-    expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
-    try:
-        expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
-    except Exception:
-        page.screenshot(path="debug.png", full_page=True)
-        expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=1)
+    
+    check_user_has_logged_in(page, "test_user_can_log_in_with_valid_credentials.png")
 
 
 @pytest.mark.regression
@@ -35,11 +31,9 @@ def test_user_can_log_in_with_valid_credentials_2(page: Page, setup_page):
     password = page.get_by_label("Password")
     password.fill(os.getenv("PASSWORD"))
 
-    # Wait for navigation after pressing Enter - CI environments are slower
-    with page.expect_navigation(timeout=60000, wait_until="networkidle"):
-        password.press("Enter")
+    password.press("Enter")
 
-    check_user_has_logged_in(page)
+    check_user_has_logged_in(page, "test_user_can_log_in_with_valid_credentials_2.png")
 
 
 @pytest.mark.smoke
@@ -113,7 +107,7 @@ def test_whitespaces_are_trimmed_from_email(page: Page, setup_page):
     email_text = "    " + os.getenv("EMAIL") + ""
     
     log_in_user(page, email_text)    
-    check_user_has_logged_in(page)
+    check_user_has_logged_in(page, "test_whitespaces_are_trimmed_from_email.png")
 
 
 @pytest.mark.regression
