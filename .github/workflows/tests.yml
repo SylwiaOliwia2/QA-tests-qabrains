@@ -29,16 +29,14 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install --with-deps
       
-      - name: Set up environment variables
-        env:
-          EMAIL: ${{ secrets.TEST_EMAIL }}
-          PASSWORD: ${{ secrets.TEST_PASSWORD }}
-        run: |
-          echo "EMAIL=${{ secrets.TEST_EMAIL }}" >> $GITHUB_ENV
-          echo "PASSWORD=${{ secrets.TEST_PASSWORD }}" >> $GITHUB_ENV
-      
       - name: Run smoke tests
-        run: pytest -m smoke -v
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
+          echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
+          pytest -m smoke -v
       
       - name: Upload test results (if failed)
         if: failure()
@@ -48,6 +46,14 @@ jobs:
           path: |
             test-results/
             playwright-report/
+      
+      - name: Upload debug screenshots (if failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-debug-screenshots
+          path: debug.png
+          if-no-files-found: ignore
 
   regression:
     name: Regression Tests
@@ -72,16 +78,14 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install --with-deps
       
-      - name: Set up environment variables
-        env:
-          EMAIL: ${{ secrets.TEST_EMAIL }}
-          PASSWORD: ${{ secrets.TEST_PASSWORD }}
-        run: |
-          echo "EMAIL=${{ secrets.TEST_EMAIL }}" >> $GITHUB_ENV
-          echo "PASSWORD=${{ secrets.TEST_PASSWORD }}" >> $GITHUB_ENV
-      
       - name: Run regression tests
-        run: pytest -m regression -v
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
+          echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
+          pytest -m regression -v
       
       - name: Upload test results (if failed)
         if: failure()
@@ -91,3 +95,11 @@ jobs:
           path: |
             test-results/
             playwright-report/
+      
+      - name: Upload debug screenshots (if failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-debug-screenshots
+          path: debug.png
+          if-no-files-found: ignore

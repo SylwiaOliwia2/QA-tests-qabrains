@@ -16,9 +16,8 @@ def test_has_heading(page: Page, setup_page):
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
-    
     log_in_user(page)
-    check_user_has_logged_in(page)
+    check_user_has_logged_in(page, "test_user_can_log_in_with_valid_credentials.png")
 
 
 @pytest.mark.regression
@@ -31,7 +30,7 @@ def test_user_can_log_in_with_valid_credentials_2(page: Page, setup_page):
 
     password.press("Enter")
 
-    check_user_has_logged_in(page)
+    check_user_has_logged_in(page, "test_user_can_log_in_with_valid_credentials_2.png")
 
 
 @pytest.mark.smoke
@@ -42,7 +41,8 @@ def test_user_sees_error_message_when_password_is_invalid(page: Page, setup_page
 
     page.get_by_role("button", name="Login").click()
 
-    expect(page.get_by_text("Username matched but password is incorrect.")).to_be_visible()
+    password_warning = page.get_by_text("Username matched but password is incorrect.")
+    expect(password_warning).to_be_visible()
 
 
 @pytest.mark.smoke
@@ -104,7 +104,7 @@ def test_whitespaces_are_trimmed_from_email(page: Page, setup_page):
     email_text = "    " + os.getenv("EMAIL") + ""
     
     log_in_user(page, email_text)    
-    check_user_has_logged_in(page)
+    check_user_has_logged_in(page, "test_whitespaces_are_trimmed_from_email.png")
 
 
 @pytest.mark.regression
