@@ -26,8 +26,11 @@ def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
     page.get_by_label("Password").fill(os.getenv("PASSWORD"))
     page.get_by_role("button", name="Login").click()
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
-    expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
-    page.screenshot(path="debug.png", full_page=True)
+    try:
+        expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=30000)
+    except Exception:
+        page.screenshot(path="debug.png", full_page=True)
+        expect(page.get_by_role("heading", name="Products")).to_be_visible(timeout=1)
 
 
 @pytest.mark.regression
