@@ -22,8 +22,8 @@ def envs_exist():
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_user_can_log_in_with_valid_credentials(page: Page, setup_page):
-    page.get_by_label("Email").fill(os.getenv("EMAIL"))
-    page.get_by_label("Password").fill(os.getenv("PASSWORD"))
+    page.get_by_label("Email").fill("test@qabrains.com")
+    page.get_by_label("Password").fill("Password123")
     page.get_by_role("button", name="Login").click()
     expect(page).to_have_url(re.compile(".*ecommerce"), timeout=30000)
     try:
