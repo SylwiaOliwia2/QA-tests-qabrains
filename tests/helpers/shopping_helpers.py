@@ -45,3 +45,31 @@ def get_cart_total_sum(page: Page) -> float:
                 continue
     
     return total_sum
+
+
+def navigate_to_checkout_info(page: Page):
+    page.get_by_role("button", name=re.compile("checkout", re.IGNORECASE)).click()
+    expect(page).to_have_url(re.compile(".*checkout.info.*"))
+
+
+def fill_checkout_form(page: Page, first_name: str = "Anna", last_name: str = "Fabulous", zip_code: str = "12345"):
+    """
+    Fill the checkout form with provided information.
+    
+    Args:
+        first_name: First name to fill in
+        last_name: Last name to fill in
+        zip_code: Zip code to fill in
+    """
+    first_name_field = page.get_by_placeholder(re.compile(".*john.*", re.IGNORECASE))
+    last_name_field = page.get_by_placeholder(re.compile(".*doe.*", re.IGNORECASE))
+    zip_code_field = page.locator('input[value="1207"]')
+    
+    first_name_field.fill(first_name)
+    last_name_field.fill(last_name)
+    zip_code_field.fill(zip_code)
+
+
+def continue_to_checkout_overview(page: Page):
+    page.get_by_role("button", name="Continue").click()
+    expect(page).to_have_url(re.compile(".*checkout.overview.*"), timeout=30000)
