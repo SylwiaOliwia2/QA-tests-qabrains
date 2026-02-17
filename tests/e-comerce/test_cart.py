@@ -28,7 +28,6 @@ def test_user_can_remove_items_from_cart_on_shopping_page(page: Page, setup_shop
 
 
 @pytest.mark.regression
-@pytest.mark.current
 def test_user_can_remove_items_from_cart_on_cart_page(page: Page, setup_shopping_page):
     add_to_cart_by_item_number(page, 3, 4)
     go_to_cart(page)
@@ -108,3 +107,5 @@ def test_user_can_checkout(page: Page, setup_shopping_page):
 
 
 # TODO: test_user_can_cancel_purchase
+
+# TODO: test_user_can_sort_items_in_cart
