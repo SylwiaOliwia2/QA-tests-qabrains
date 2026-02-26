@@ -104,7 +104,6 @@ def test_whitespaces_are_trimmed_from_email(driver_login_page):
 
 @pytest.mark.regression
 @pytest.mark.smoke
-@pytest.mark.current
 def test_logged_in_user_can_log_out(driver_login_page):
     log_in_user(driver_login_page)
 
