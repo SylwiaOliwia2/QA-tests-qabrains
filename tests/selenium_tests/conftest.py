@@ -18,7 +18,7 @@ def get_chrome_options():
     """Get Chrome options configured for both local and CI environments"""
     options = Options()
     
-    # CI-specific options (headless mode and stability flags)
+    # CI needs headless mode and other flags for stable run
     if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
