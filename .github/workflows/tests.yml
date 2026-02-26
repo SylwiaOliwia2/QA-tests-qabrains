@@ -77,6 +77,11 @@ jobs:
       - name: Set up Chrome for Selenium
         uses: browser-actions/setup-chrome@latest
       
+      - name: Verify Chrome installation
+        run: |
+          google-chrome --version || chromium --version || chromium-browser --version
+          chromedriver --version
+      
       - name: Run Selenium smoke tests
         env:
           EMAIL: ${{ secrets.EMAIL }}
@@ -165,6 +170,11 @@ jobs:
       
       - name: Set up Chrome for Selenium
         uses: browser-actions/setup-chrome@latest
+      
+      - name: Verify Chrome installation
+        run: |
+          google-chrome --version || chromium --version || chromium-browser --version
+          chromedriver --version
       
       - name: Run Selenium regression tests
         env:
