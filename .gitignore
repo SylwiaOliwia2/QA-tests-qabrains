@@ -43,3 +43,5 @@ trace.zip
 .env.*.local
 
 notes/
+
+.cursor/
