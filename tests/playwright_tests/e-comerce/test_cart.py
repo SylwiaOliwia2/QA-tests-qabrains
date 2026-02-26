@@ -1,5 +1,5 @@
 from playwright.sync_api import Page, expect
-from tests.helpers.shopping_helpers import (
+from tests.playwright_tests.helpers.shopping_helpers import (
     add_to_cart_by_item_number, 
     go_to_cart, 
     check_cart_products_amount,

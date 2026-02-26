@@ -3,6 +3,12 @@ import pytest
 from playwright.sync_api import Page, expect
 import os
 import re
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
 # NOTE:used for local setup only. For CI/CD, we use environment variables.
 load_dotenv()

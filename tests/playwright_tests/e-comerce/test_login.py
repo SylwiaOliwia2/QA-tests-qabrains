@@ -3,7 +3,7 @@ import pytest
 import os
 import re
 
-from tests.helpers.login_helpers import check_user_has_logged_in, log_in_user
+from tests.playwright_tests.helpers.login_helpers import check_user_has_logged_in, log_in_user
 
 
 @pytest.mark.smoke
