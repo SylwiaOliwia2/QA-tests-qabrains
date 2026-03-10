@@ -92,6 +92,8 @@ For CI/CD to work, you need to configure GitHub Secrets:
 3. Add the following secrets:
    - `EMAIL`: Your test account email
    - `PASSWORD`: Your test account password
+   - `TESTRAIL_USERNAME`: Your TestRail username/email
+   - `TESTRAIL_PASSWORD`: Your TestRail API key or password
 
 ### CI Workflow
 

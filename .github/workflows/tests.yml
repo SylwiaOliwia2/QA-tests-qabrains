@@ -33,10 +33,15 @@ jobs:
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
+          TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
+          TR_URL: https://sylwiamielnicka.testrail.io
+          TR_PROJECT_ID: 2
+          TR_RUN_NAME: Smoke Tests (Playwright) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
           echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
-          pytest tests/playwright_tests/ -m smoke -v
+          pytest tests/playwright_tests/ -m smoke -v --testrail
       
       - name: Upload test results (if failed)
         if: failure()
@@ -86,10 +91,15 @@ jobs:
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
+          TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
+          TR_URL: https://sylwiamielnicka.testrail.io
+          TR_PROJECT_ID: 2
+          TR_RUN_NAME: Smoke Tests (Selenium) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
           echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
-          pytest tests/selenium_tests/ -m smoke -v
+          pytest tests/selenium_tests/ -m smoke -v --testrail
       
       - name: Upload test results (if failed)
         if: failure()
@@ -126,10 +136,15 @@ jobs:
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
+          TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
+          TR_URL: https://sylwiamielnicka.testrail.io
+          TR_PROJECT_ID: 2
+          TR_RUN_NAME: Regression Tests (Playwright) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
           echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
-          pytest tests/playwright_tests/ -m regression -v
+          pytest tests/playwright_tests/ -m regression -v --testrail
       
       - name: Upload test results (if failed)
         if: failure()
@@ -180,10 +195,15 @@ jobs:
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
+          TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
+          TR_URL: https://sylwiamielnicka.testrail.io
+          TR_PROJECT_ID: 2
+          TR_RUN_NAME: Regression Tests (Selenium) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
           echo "PASSWORD is set: $([ -n \"$PASSWORD\" ] && echo 'yes' || echo 'no')"
-          pytest tests/selenium_tests/ -m regression -v
+          pytest tests/selenium_tests/ -m regression -v --testrail
       
       - name: Upload test results (if failed)
         if: failure()
