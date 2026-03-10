@@ -36,7 +36,7 @@ jobs:
           TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
           TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
           TR_URL: https://sylwiamielnicka.testrail.io
-          TR_PROJECT: "Example project"
+          TR_PROJECT_ID: 2
           TR_RUN_NAME: Smoke Tests (Playwright) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
@@ -94,7 +94,7 @@ jobs:
           TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
           TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
           TR_URL: https://sylwiamielnicka.testrail.io
-          TR_PROJECT: "Example project"
+          TR_PROJECT_ID: 2
           TR_RUN_NAME: Smoke Tests (Selenium) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
@@ -139,7 +139,7 @@ jobs:
           TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
           TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
           TR_URL: https://sylwiamielnicka.testrail.io
-          TR_PROJECT: "Example project"
+          TR_PROJECT_ID: 2
           TR_RUN_NAME: Regression Tests (Playwright) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
@@ -198,7 +198,7 @@ jobs:
           TR_USERNAME: ${{ secrets.TESTRAIL_USERNAME }}
           TR_PASSWORD: ${{ secrets.TESTRAIL_PASSWORD }}
           TR_URL: https://sylwiamielnicka.testrail.io
-          TR_PROJECT: "Example project"
+          TR_PROJECT_ID: 2
           TR_RUN_NAME: Regression Tests (Selenium) - ${{ github.run_number }}
         run: |
           echo "EMAIL is set: $([ -n \"$EMAIL\" ] && echo 'yes' || echo 'no')"
